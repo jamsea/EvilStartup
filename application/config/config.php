@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://rpserver.net:777/battle/';
+
+$config['base_url']	= "http://".$_SERVER['HTTP_HOST']."/battle/";
 
 /*
 |--------------------------------------------------------------------------

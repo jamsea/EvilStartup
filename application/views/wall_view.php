@@ -1,10 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php $this->load->helper('url'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Evil Startup</title>
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
-	<script type="text/javascript" language="javascript" src="/js/jquery-1.7.1.min.js"></script>
+	
+	<script type="text/javascript" language="javascript" src="<?php echo base_url("js/jquery-1.7.1.min.js"); ?>"></script>
 
+	
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
 	<script type="text/javascript">
 		// addstartup handler
@@ -23,6 +26,14 @@
 		padding-top: 60px;
 		padding-bottom: 40px;
 	}
+	.rating {
+		text-align: center;
+	}
+	
+	.ratingNum {
+		cursor: pointer;
+	}
+	
     </style>
 </head>
 <body>
@@ -37,10 +48,10 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
-		<a class="brand" href="#"><img src="/img/logo.png"></a>
+		<a class="brand"><img src="<?php echo base_url("img/logo.png");?>" ></a>
 			<ul class="nav">
 				<li>
-					<a class="btn btn-warning btn-large" href="add">Add a Startup</a>
+					<a class="btn btn-warning btn-large" href="<?php echo base_url("wall/add");?>">Add a Startup</a>
 				</li>
 		</ul>
 	</div>
@@ -74,7 +85,12 @@
 			foreach($all_startups as $row)
 			 { ?>
 			<tr>
-			<td><a class="<?php echo $row->id ?>" onclick="vote(<?php echo $row->id ?>, $(this));" href="#"><img src="/img/arrow.png" /><?php echo $row->rating; ?></a></td>
+				<td class="rating">
+					<h2><?php echo $row->rating; ?></h2>
+					<div  class="<?php echo $row->id ?> ratingNum" onclick="vote(<?php echo $row->id ?>, $(this));" >
+						<img src="/battle/img/arrow.png" />
+					</div>
+				</td>
 			<td>
 			<h5><?php echo $row->name ?></h5>
 			<?php if ($row->active){ ?>
@@ -99,10 +115,6 @@
 
 
 			</p>
-
-			<p>
-
-			</p>
 		</div>
 	</div>
 		
@@ -111,9 +123,10 @@
 <script>
 function vote(id, element)
 {
-	  var url = "http://localhost/wall/vote/" + id;
+	
+	  var url = "<?php echo base_url("wall/vote/"); ?>" + "/" + id;
 	  $.post(url, function(data) {
-		element.html("<img src='/img/arrow.png' />" + data);
+		element.parent(".rating").html("<h2>" + data + "</h2>" + "<img src='/battle/img/arrow.png' />");
    });
 }
 </script>

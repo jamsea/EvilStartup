@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<?php $this->load->helper('url'); ?>
+
 	<title>Evil Startup</title>
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
-	<script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" language="javascript" src="<?php echo base_url("js/jquery-1.7.1.min.js"); ?>"></script>
 
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
 	<script type="text/javascript">
@@ -68,7 +70,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
-		<a class="brand" href="wall"><img src="/img/logo.png"></a>
+		<a class="brand" href="wall"><img src="<?php echo base_url("img/logo.png"); ?>"></a>
 			<ul class="nav">
 				<li>
 					<a class="btn btn-warning btn-large" href="add">Add a Startup</a>
