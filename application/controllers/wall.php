@@ -39,18 +39,103 @@ class Wall extends CI_Controller {
 
 		$this->load->view('wall_view',$data);
 	}
-	
-	public function vote($id)
-	{
-		$this->load->model('startup_model');
-		$this->startup_model->vote($id);
-	}
 
 	public function me()
 	{
 		echo "string";
 	}
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+
+		/**
+	 * add() 
+	 * 
+	 */
+	function add() {
+
+		$this->load->library('form_validation');
+		$is_ajax = false;
+	
+		
+		$rules[] = array('field' => 'name', 'label' => 'Startup Name', 'rules' => 'trim|required');
+		$rules[] = array('field' => 'desc', 'label' => 'Description', 'rules' => 'trim|required');
+		$rules[] = array('field' => 'location', 'label' => 'Where you at?', 'rules' => 'trim|required');
+		$rules[] = array('field' => 'funded', 'label' => 'funded', 'rules' => 'trim');
+		$rules[] = array('field' => 'fundedby', 'label' => 'fundedby', 'rules' => 'trim');
+
+		// load any variables to refill the form
+		$variables['name'] = $this->input->post('name', TRUE);
+		$variables['desc'] = $this->input->post('desc', TRUE);
+		$variables['location'] = $this->input->post('location', TRUE);
+		$variables['funded'] = $this->input->post('funded', TRUE);
+		$variables['fundedby'] = $this->input->post('fundedby', TRUE);
+	
+		$this->form_validation->set_rules($rules);
+		if ($this->form_validation->run() == FALSE) {
+			// first load or failed form
+			$error = array(
+			'name' => form_error('name'),
+			'desc' => form_error('desc'),
+			'location' => form_error('location'),
+			'funded' => form_error('funded'),
+			'fundedby' => form_error('fundedby'),
+				);
+			$variables['error'] = $error;
+			if ($is_ajax) {
+				$config['content'] = json_encode($error);
+			} else {
+				$config['content'] = "";
+				// 
+				// change the view name to the name of what you save the view file as
+				//
+				//$config['content'] = $this->load->view('add_view', $variables, TRUE);
+			}
+		} else {
+			// perform action based on submission of form, if you return $message in this manner
+			// it defaults to replacing the form in the page with the message that is returned.
+			
+			//echo $variables['desc'];
+
+			$this->load->model('startup_model');
+			$data = array(
+               'name' => $variables['name'],
+               'desc' => $variables['desc'],
+               'location' => $variables['location'],
+               'funded' => $variables['funded'],
+               'fundedby' => $variables['fundedby']
+            );
+			$this->startup_model->addstartup($data);
+
+
+			$message = '<p>You just successfully submitted <strong>this</strong> form!</p>';
+			$config['content'] = $message;
+
+
+			if ($is_ajax) {
+				$config['content'] = json_encode(array('form_message' => $message));
+			} else {
+				$config['content'] = $message;
+			}
+		}
+		if ($is_ajax) {
+			//echo $config['content'];
+		} else {
+
+			//$data['content'] = "Thanks!";
+			//$config['javascript'] = 'addstartup.js';
+			$this->load->view('add_view', $config);
+			// $this->template->display($config);  // if using template library
+		}
+	
+	} // add()
+	
+	/**
+	Adds a vote to a startup based on it's id. S
+	**/
+	public function vote($id)
+	{
+		$this->load->model('startup_model');
+		$this->startup_model->vote($id);
+		
+	}
+		
+}

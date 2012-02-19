@@ -8,11 +8,6 @@ class Startup_model extends CI_Model
 		$offset = $this->getOffset();
 		return $this->db->query("SELECT * FROM " . $this->tbl . " WHERE active=1 ORDER BY created DESC LIMIT " .$offset.", ".$perPage)->result();
 	}
-	
-	function vote($id)
-	{
-		$this->db->query("UPDATE " . $this->tbl . " SET rating=rating+1 WHERE id=" . $id);
-	}
 
 	function getOffset()
 	{
@@ -25,6 +20,12 @@ class Startup_model extends CI_Model
         return $offset;
     }
 
+    function addstartup($data)
+    {
+
+		$this->db->insert('startup_tbl', $data); 
+    }
+
 	function count()
 	{
 	  $sql = "SELECT * FROM msg_tbl";
@@ -35,4 +36,10 @@ class Startup_model extends CI_Model
 	{
 		return $this->db->insert($this->tbl, $msg);
 	}
+	
+	function vote($id)
+	{
+		$this->db->query("UPDATE " . $this->tbl . " SET rating=rating+1 WHERE id=" . $id);
+	}
+	
 }

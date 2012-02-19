@@ -1,14 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Day Care</title>
+	<title>Evil Startup</title>
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" language="javascript" src="battle/jquery-1.7.1.js"></script>
+
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
 	<script type="text/javascript">
+		// addstartup handler
+
+		  $(document).ready(function() {
+		 
+
+
+		});
+	
+
 	</script>
 	<style type="text/css">
 	body {
+		background:#ff9a1e;
 		padding-top: 60px;
 		padding-bottom: 40px;
 	}
@@ -16,13 +27,19 @@
 </head>
 <body>
 
+
+
+
+
+
+
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
-		<a class="brand" href="#">EvilStartup</a>
+		<a class="brand" href="#"><img src="/battle/img/logo.png"></a>
 			<ul class="nav">
-			<li><a href="#">Home</a></li>
-
+			
 		</ul>
 	</div>
   </div>
@@ -31,59 +48,61 @@
 <div class="container">
 
 	<div class="row">
-		<div class="span3">
-			<ul class="nav nav-list well">
-				<li class="nav-header">
-					Menu
-				</li>
-				<li class="active">
-					<a href="#">Home</a>
-				</li>
-				<li>
-					<a href="#">Charts</a>
-				</li>
-			</ul>
+	
+
+		<div class="span12 well">
+
+		<div class="hero-unit">
+		<h1>Instantly access the worlds best (most evil) startups.</h1>
+		<p>Muahhahaha.</p>
+		<p>
+		<a class="btn btn-warning btn-large" href="add">
+		Add a Startup
+		</a>
+		</p>
 		</div>
 
-		<div class="span8 well">
-
-			<p>Hello, Jakub Koter</p>
 			
 			<p>
 
 			<table class="table table-bordered table-striped">
 			<tbody>
 			<tr>
-			<td>Message</td>
 			</tr>
 			<?php $this->load->helper('dob'); ?>
 			<?php 
 			foreach($all_startups as $row)
 			 { ?>
 			<tr>
+			<td><a class="btn" href="#">VOTE:0</a></td>
 			<td>
-			<?php echo $row->name ?>
+			<h5><?php echo $row->name ?></h5>
 			<?php if ($row->active){ ?>
 				
 			<?php } ?>
-			<h5><?php echo $row->desc ?></h5>
-			<h6>LOCATED IN  </6><span class="label label-warning"><?php echo $row->location ?></span>
+			<?php echo $row->desc ?>
+			<h6>LOCATED IN  <span class="label label-warning"><?php echo $row->location ?></span>
 
 			<?php if ($row->funded){ ?>
-			<h6>FUNDED BY </6><span class="label label-warning"><?php echo $row->fundedby ?></span>
+			FUNDED BY </6><span class="label label-default"><?php echo $row->fundedby ?></span>
 			<?php }else{ ?>
 			<span class="label label-important">NOT FUNDED</span>
-			<?php } ?>
+			<?php } ?></6>
 			
 			<!--<h6><?php echo format_date($row->created) ?></h6>-->
-			<a href="vote/<?php echo $row->id;?>" class="btn btn-success" href="#">VOTE:</a>
+			
 			</td>
 			</tr>
 			<?php } ?></tbody>
 			</table>
 
+
+
 			</p>
-			<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+			<p>
+
+			</p>
 		</div>
 	</div>
 		

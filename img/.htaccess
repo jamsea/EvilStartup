@@ -1,0 +1,6 @@
+RewriteEngine On
+Options +FollowSymlinks
+RewriteBase /battle/img/
+RewriteCond $1 !^(index\.php|crossdomain\.xml|stage|prod|backup|js|css|image)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/ [R=301,L]
