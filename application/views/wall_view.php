@@ -27,13 +27,33 @@
 		padding-bottom: 40px;
 	}
 	.rating {
+		/*background: #f00;
+		padding: 0px;
 		text-align: center;
+		border: 1px solid;
+		-moz-border-radius: 15px;
+		border-radius: 15px;*/
+		
+		padding: 0px;
+		border-left: 0px;
 	}
 	
 	.ratingNum {
 		cursor: pointer;
+		clear: none;
 	}
 	
+	.table td {
+		
+	}
+	
+	.table-bordered th + th, .table-bordered td + td, .table-bordered th + td, .table-bordered td + th {
+		border-left: 0px;
+	}
+
+	table {
+		
+	}
     </style>
 </head>
 <body>
@@ -76,20 +96,22 @@
 			
 			<p>
 
-			<table class="table table-bordered table-striped">
+			<table class="table table-striped table-bordered table-condensed">
 			<tbody>
-			<tr>
-			</tr>
+			
 			<?php $this->load->helper('dob'); ?>
 			<?php 
 			foreach($all_startups as $row)
 			 { ?>
 			<tr>
 				<td class="rating">
-					<h2><?php echo $row->rating; ?></h2>
-					<div  class="<?php echo $row->id ?> ratingNum" onclick="vote(<?php echo $row->id ?>, $(this));" >
-						<img src="/battle/img/arrow.png" />
-					</div>
+					<a class="btn">
+						<div class="<?php echo $row->id ?>" onclick="vote(<?php echo $row->id ?>, $(this));" >
+							<h2><?php echo $row->rating; ?></h2>
+							<img class="ratingNum" src="/battle/img/arrow.png" />
+							
+						</div>
+					</a>
 				</td>
 			<td>
 			<h5><?php echo $row->name ?></h5>
@@ -126,7 +148,7 @@ function vote(id, element)
 	
 	  var url = "<?php echo base_url("wall/vote/"); ?>" + "/" + id;
 	  $.post(url, function(data) {
-		element.parent(".rating").html("<h2>" + data + "</h2>" + "<img src='/battle/img/arrow.png' />");
+		element.parent(".btn").html("<h2>" + data + "</h2>" + "<img src='/battle/img/arrow.png' />");
    });
 }
 </script>
