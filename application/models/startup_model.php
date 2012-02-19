@@ -42,4 +42,16 @@ class Startup_model extends CI_Model
 		$this->db->query("UPDATE " . $this->tbl . " SET rating=rating+1 WHERE id=" . $id);
 	}
 	
+	function getRating($id)
+	{
+		$query = $this->db->query("SELECT rating FROM ". $this->tbl ." WHERE id='" . $id ."'");
+		
+		foreach ($query->result() as $row)
+		{
+			$rating = $row->rating;
+		}
+		
+		return $rating;
+	}
+	
 }

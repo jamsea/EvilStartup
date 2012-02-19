@@ -133,8 +133,13 @@ class Wall extends CI_Controller {
 	**/
 	public function vote($id)
 	{
+		$this->load->library('form_validation');
+		$is_ajax = false;
+		
 		$this->load->model('startup_model');
 		$this->startup_model->vote($id);
+
+		echo $this->startup_model->getRating($id);
 		
 	}
 		

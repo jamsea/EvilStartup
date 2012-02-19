@@ -3,7 +3,7 @@
 <head>
 	<title>Evil Startup</title>
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
-	<script type="text/javascript" language="javascript" src="battle/jquery-1.7.1.js"></script>
+	<script type="text/javascript" language="javascript" src="/js/jquery-1.7.1.min.js"></script>
 
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
 	<script type="text/javascript">
@@ -37,9 +37,11 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
-		<a class="brand" href="#"><img src="/battle/img/logo.png"></a>
+		<a class="brand" href="#"><img src="/img/logo.png"></a>
 			<ul class="nav">
-			
+				<li>
+					<a class="btn btn-warning btn-large" href="add">Add a Startup</a>
+				</li>
 		</ul>
 	</div>
   </div>
@@ -56,9 +58,7 @@
 		<h1>Instantly access the worlds best (most evil) startups.</h1>
 		<p>Muahhahaha.</p>
 		<p>
-		<a class="btn btn-warning btn-large" href="add">
-		Add a Startup
-		</a>
+
 		</p>
 		</div>
 
@@ -74,7 +74,7 @@
 			foreach($all_startups as $row)
 			 { ?>
 			<tr>
-			<td><a class="btn" href="#">VOTE:0</a></td>
+			<td><a class="<?php echo $row->id ?>" onclick="vote(<?php echo $row->id ?>, $(this));" href="#"><img src="/img/arrow.png" /><?php echo $row->rating; ?></a></td>
 			<td>
 			<h5><?php echo $row->name ?></h5>
 			<?php if ($row->active){ ?>
@@ -107,5 +107,18 @@
 	</div>
 		
 </div>
+
+<script>
+function vote(id, element)
+{
+	  var url = "http://localhost/wall/vote/" + id;
+	  $.post(url, function(data) {
+		element.html("<img src='/img/arrow.png' />" + data);
+   });
+}
+</script>
+
+
+
 </body>
 </html>

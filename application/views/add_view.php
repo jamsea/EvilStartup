@@ -68,9 +68,11 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
 	<div class="container">
-		<a class="brand" href="wall"><img src="/battle/img/logo.png"></a>
+		<a class="brand" href="wall"><img src="/img/logo.png"></a>
 			<ul class="nav">
-
+				<li>
+					<a class="btn btn-warning btn-large" href="add">Add a Startup</a>
+				</li>
 		</ul>
 	</div>
   </div>
